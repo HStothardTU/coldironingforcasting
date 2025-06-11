@@ -4,7 +4,7 @@ import numpy as np
 from prophet import Prophet
 import matplotlib.pyplot as plt
 
-st.title("⚓ Cold Ironing Demand Forecasting")
+st.title(" Cold Ironing Demand Forecasting")
 
 st.sidebar.header("Data Source")
 data_source = st.sidebar.radio("Choose data source:", ("Upload CSV", "Generate Synthetic Data"))
@@ -44,6 +44,7 @@ if 'df' in locals():
     forecast = model.predict(future)
 
     st.subheader("Forecast")
+    st.subheader("Historical Cold Ironing Demand")
     fig1 = model.plot(forecast)
     st.pyplot(fig1)
 
