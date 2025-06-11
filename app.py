@@ -3,11 +3,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from prophet import Prophet
-from io import BytesIO
+import matplotlib.pyplot as plt
 
 st.title(" Cold Ironing Demand Forecasting")
 
-st.sidebar.header("Options")
+st.sidebar.header("Data Source")
 data_source = st.sidebar.radio("Choose data source:", ("Upload CSV", "Generate Synthetic Data"))
 
 def generate_synthetic_data():
@@ -45,9 +45,9 @@ if 'df' in locals():
     forecast = model.predict(future)
 
     st.subheader("Forecast")
-    fig = model.plot(forecast)
-    st.pyplot(fig)
+    fig1 = model.plot(forecast)
+    st.pyplot(fig1)
 
     forecast_download = forecast[["ds", "yhat", "yhat_lower", "yhat_upper"]]
     csv = forecast_download.to_csv(index=False).encode('utf-8')
-    st.download_button(" Download Forecast CSV", data=csv, file_name="cold_ironing_forecast.csv", mime="text/csv")
+    st.download_button("Download Forecast CSV", data=csv, file_name="cold_ironing_forecast.csv", mime="text/csv")
